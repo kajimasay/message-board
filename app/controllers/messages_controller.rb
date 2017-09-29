@@ -1,10 +1,17 @@
 class MessagesController < ApplicationController
+# @message = Message.find(params[:id])がset_messageで置き換わった
+# show,edit,update,destroy の４つをさらにbefore_actionで４つのアクション前に
+# set_messageを実行するように指定。４つのアクションにあったset_message
+# もいらなくなる
+  before_action :set_message, only: [:show, :edit, :update, :destroy]
+
+  
   def index
      @messages = Message.all
   end
   
   def show
-    @message = Message.find(params[:id])
+    
   end
   
   def new
@@ -25,11 +32,11 @@ class MessagesController < ApplicationController
   end
   
   def edit
-    @message = Message.find(params[:id])
+    
   end
   
   def update
-        @message = Message.find(params[:id])
+        
 
     if @message.update(message_params)
       flash[:success] = 'Message は正常に更新されました'
@@ -41,7 +48,7 @@ class MessagesController < ApplicationController
   end
   
   def destroy
-    @message = Message.find(params[:id])
+    
     @message.destroy
 
     flash[:success] = 'Message は正常に削除されました'
@@ -51,6 +58,10 @@ class MessagesController < ApplicationController
 end
 
 private
+  #文中繰り返し記述される@message = Message.find(params[:id])をまとめる
+  def set_message
+    @message = Message.find(params[:id])
+  end
 
   # Strong Parameter
   def message_params
