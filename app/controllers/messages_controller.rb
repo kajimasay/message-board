@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
   
   def index
     # karamariを使ってページネーション
-     @messages = Message.order(created_at: :desc).page(params[:page]).per(10)
+     @messages = Message.order(created_at: :desc).page(params[:page]).per(3)
   end
   
   def show
