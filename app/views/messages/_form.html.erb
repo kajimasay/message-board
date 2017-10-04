@@ -1,6 +1,10 @@
 <%= form_for(message) do |f| %>
   <% if message.errors.any? %>
     <div id="error_explanation">
+      
+    <h2><%= message.errors.count %>件のエラーがあります。</h2>
+
+      
       <ul>
         <% message.errors.full_messages.each do |message| %>
           <li><%= message %></li>

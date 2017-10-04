@@ -7,7 +7,8 @@ class MessagesController < ApplicationController
 
   
   def index
-     @messages = Message.all
+    # karamariを使ってページネーション
+     @messages = Message.order(created_at: :desc).page(params[:page]).per(10)
   end
   
   def show
@@ -36,8 +37,6 @@ class MessagesController < ApplicationController
   end
   
   def update
-        
-
     if @message.update(message_params)
       flash[:success] = 'Message は正常に更新されました'
       redirect_to @message
